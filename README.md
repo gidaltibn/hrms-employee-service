@@ -47,7 +47,7 @@ O **Employee Service** faz parte do sistema **HRMS (Human Resource Management Sy
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/gidaltibn/employee-service.git
+   git clone https://github.com/gidaltibn/hrms-employee-service.git
    ```
 
 2. Navegue até o diretório do projeto:
