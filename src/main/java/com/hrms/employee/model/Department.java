@@ -19,17 +19,11 @@ public class Department {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @Column(nullable = true)
+    private String description;
+
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Employee> employees;
 
-    // Métodos adicionais (opcional)
-    public void addEmployee(Employee employee) {
-        employees.add(employee);
-        employee.setDepartment(this);
-    }
 
-    public void removeEmployee(Employee employee) {
-        employees.remove(employee);
-        employee.setDepartment(null);
-    }
 }

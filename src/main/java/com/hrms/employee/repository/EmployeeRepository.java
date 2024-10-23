@@ -1,4 +1,7 @@
 package com.hrms.employee.repository;
 
-public interface EmployeeRepository {
+import com.hrms.employee.model.Employee;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 }

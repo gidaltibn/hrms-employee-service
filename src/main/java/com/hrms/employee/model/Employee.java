@@ -31,6 +31,11 @@ public class Employee {
     @Column(nullable = false)
     private LocalDate hireDate;
 
+    @Column(unique = true, nullable = false)
+    private String cpf;
+
+
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id")
     private Department department;
@@ -38,8 +43,5 @@ public class Employee {
     @Column(nullable = false)
     private Double salary;
 
-    // Métodos adicionais (opcional)
-    public String getFullName() {
-        return firstName + " " + lastName;
-    }
+
 }
