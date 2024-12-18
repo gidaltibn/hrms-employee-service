@@ -1,5 +1,3 @@
----
-
 ### Employee Service - HRMS
 
 **Descrição**  
@@ -10,8 +8,6 @@ O **Employee Service** faz parte do sistema **HRMS (Human Resource Management Sy
 - **Fluxo de Cadastro de Funcionários**: Um secretário (ou outro usuário com permissão) faz o pré-cadastro do funcionário com dados básicos (nome, sobrenome, email, telefone, data de contratação, departamento, salário). O próprio funcionário posteriormente pode criar seu usuário no Auth Service.
 - **CRUD de Departamentos**: O Employee Service também gerencia departamentos, permitindo cadastrar, atualizar, listar e remover departamentos. Essas ações também requerem a validação do token JWT.
 - **Validação via JWT**: Antes de realizar operações, o Employee Service valida o token JWT no cabeçalho da requisição, garantindo que apenas usuários autenticados pelo Auth Service tenham acesso.
-
----
 
 ### Funcionalidades
 
