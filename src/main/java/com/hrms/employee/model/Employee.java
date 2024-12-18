@@ -22,19 +22,16 @@ public class Employee {
     @Column(nullable = false)
     private String lastName;
 
+    // Mantemos o email para contato e finalização do cadastro
     @Column(unique = true, nullable = false)
     private String email;
 
+    // Mantemos o telefone para eventual contato
     @Column(unique = true, nullable = true)
     private String phone;
 
     @Column(nullable = false)
     private LocalDate hireDate;
-
-    @Column(unique = true, nullable = false)
-    private String cpf;
-
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id")
@@ -43,5 +40,14 @@ public class Employee {
     @Column(nullable = false)
     private Double salary;
 
-
+    // Construtor auxiliar para criar Employee
+    public Employee(String firstName, String lastName, String email, String phone, LocalDate hireDate, Department department, Double salary) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.hireDate = hireDate;
+        this.department = department;
+        this.salary = salary;
+    }
 }

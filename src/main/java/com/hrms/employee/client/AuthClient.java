@@ -5,9 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.http.ResponseEntity;
 
-@FeignClient(name = "auth-service", url = "${auth-service.url}")
+@FeignClient(name = "auth-service", url = "http://localhost:8082/auth")
 public interface AuthClient {
-
-    @GetMapping("/auth/validate")
+    @GetMapping("/validate")
     ResponseEntity<String> validateToken(@RequestHeader("Authorization") String token);
 }

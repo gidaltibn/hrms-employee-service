@@ -23,36 +23,52 @@ public class DepartmentController {
     private AuthClient authClient;
 
     @PostMapping
-    public ResponseEntity<Object> save(@RequestBody DepartmentDTO departmentDTO, @RequestHeader("Authorization") String token) {
+    public ResponseEntity<Object> save(@Valid @RequestBody DepartmentDTO departmentDTO,
+                                       @RequestHeader("Authorization") String token) {
         ResponseEntity<String> authResponse = authClient.validateToken(token);
 
         if (authResponse.getStatusCode() == HttpStatus.OK) {
-            // Aqui você pode processar o salvamento do departamento
+            departmentService.save(departmentDTO);
             return ResponseEntity.ok("Departamento salvo com sucesso.");
         } else {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Você não tem permissão para criar departamentos");
         }
     }
 
-
     @GetMapping("/{id}")
-    public ResponseEntity<DepartmentDTO> findById(@PathVariable Long id) {
-        return ResponseEntity.ok(departmentService.findById(id));
+    public ResponseEntity<DepartmentDTO> findById(@PathVariable Long id, @RequestHeader("Authorization") String token) {
+        if (authClient.validateToken(token).getStatusCode() == HttpStatus.OK) {
+            return ResponseEntity.ok(departmentService.findById(id));
+        } else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
+        }
     }
 
     @PutMapping
-    public ResponseEntity<DepartmentDTO> update(@RequestBody DepartmentDTO departmentDTO) {
-        return ResponseEntity.ok(departmentService.update(departmentDTO));
+    public ResponseEntity<DepartmentDTO> update(@RequestBody DepartmentDTO departmentDTO, @RequestHeader("Authorization") String token) {
+        if (authClient.validateToken(token).getStatusCode() == HttpStatus.OK) {
+            return ResponseEntity.ok(departmentService.update(departmentDTO));
+        } else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
+        }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        departmentService.delete(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Void> delete(@PathVariable Long id, @RequestHeader("Authorization") String token) {
+        if (authClient.validateToken(token).getStatusCode() == HttpStatus.OK) {
+            departmentService.delete(id);
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
     }
 
     @GetMapping
-    public ResponseEntity<List<DepartmentDTO>> findAll() {
-        return ResponseEntity.ok(departmentService.findAll());
+    public ResponseEntity<List<DepartmentDTO>> findAll(@RequestHeader("Authorization") String token) {
+        if (authClient.validateToken(token).getStatusCode() == HttpStatus.OK) {
+            return ResponseEntity.ok(departmentService.findAll());
+        } else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
+        }
     }
 }
